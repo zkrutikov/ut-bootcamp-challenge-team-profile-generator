@@ -5,20 +5,20 @@ const generateTeam = function (team) {
     const generateManager = function (manager) {
      return `
      <div>
-     <p>${manager.getName}</p>
-     <p>${manager.getId}</p>
-     <p>${manager.getEmail}</p>
-     <p>${manager.getOfficeNumber}</p>
+     <p>${manager.getName()}</p>
+     <p>${manager.getId()}</p>
+     <p>${manager.getEmail()}</p>
+     <p>${manager.getOfficeNumber()}</p>
      </div>
      `
     }
     const generateEngineer = function (engineer) {
         return `
         <div>
-        <p>${engineer.getName}</p>
-        <p>${engineer.getId}</p>
-        <p>${engineer.getEmail}</p>
-        <p>${engineer.getGitHub}</p>
+        <p>${engineer.getName()}</p>
+        <p>${engineer.getId()}</p>
+        <p>${engineer.getEmail()}</p>
+        <p>${engineer.getGitHub()}</p>
         </div>
         `
        }
@@ -26,13 +26,14 @@ const generateTeam = function (team) {
     const generateIntern = function (intern) {
         return `
         <div>
-        <p>${intern.getName}</p>
-        <p>${intern.getId}</p>
-        <p>${intern.getEmail}</p>
-        <p>${intern.getSchool}</p>
+        <p>${intern.getName()}</p>
+        <p>${intern.getId()}</p>
+        <p>${intern.getEmail()}</p>
+        <p>${intern.getSchool()}</p>
         </div>
         `
        }
+
     const html = [];
     html.push(team.filter(employee => employee.getRole() == 'Manager')
     .map(manager => generateManager(manager))
@@ -46,8 +47,11 @@ const generateTeam = function (team) {
     return html.join('');
 }
 
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
 
-const generateHTML = function() {
+const generateHTML = function(team) {
     return `
     <!DOCTYPE html>
 <html lang="en">
@@ -81,8 +85,5 @@ const generateHTML = function() {
     `
 }
 
-function writeToFile(fileName, data) {
-    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
-}
 
 module.exports = generateHTML;

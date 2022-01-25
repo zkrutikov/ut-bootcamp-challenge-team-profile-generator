@@ -1,4 +1,8 @@
 const inquirer = require('inquirer');
+const fs = require ('fs');
+const path = require ('path');
+const DIST_DIR = path.resolve(__dirname, 'dist');
+const distPath = path.join(DIST_DIR, 'team.html');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -30,6 +34,7 @@ const internQuestions = [
     {type: "input", message: "What is the intern's email?", name: "email"},
     {type: "number", message: "What is the intern's office school?", name: "school"}
 ]
+
 const addToTeam = function() {
     inquirer.prompt(generalQuestions)
   .then((userChoice) => {
@@ -47,7 +52,10 @@ const addToTeam = function() {
 }
 
 const generateHtml = function (){
-    
+    if (!fs.existsSync(DIST_DIR)) {
+        fs.mkdirSync(DIST_DIR);
+      }
+      fs.writeFileSync(distPath, generateHTML(team), 'utf-8');
 }
 
 const addManager = function() {
@@ -88,5 +96,5 @@ inquirer.prompt(managerQuestions)
   addToTeam();
  })
 
- module.exports = team;
- 
+
+
