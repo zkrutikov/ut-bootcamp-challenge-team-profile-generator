@@ -18,7 +18,7 @@ const generateTeam = function (team) {
         <p>${engineer.getName()}</p>
         <p>${engineer.getId()}</p>
         <p>${engineer.getEmail()}</p>
-        <p>${engineer.getGitHub()}</p>
+        <p>${engineer.getGithub()}</p>
         </div>
         `
        }
